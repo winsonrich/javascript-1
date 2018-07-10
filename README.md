@@ -962,8 +962,11 @@ Other Style Guides
       `A string containing the ${nextNumber}.`;
     });
 
-    // good
+    // bad
     [1, 2, 3].map(number => `A string containing the ${number}.`);
+
+    // good
+    [1, 2, 3].map((number) => `A string containing the ${number}.`);
 
     // good
     [1, 2, 3].map((number) => {
@@ -1018,19 +1021,24 @@ Other Style Guides
     ```
 
   <a name="arrows--one-arg-parens"></a><a name="8.4"></a>
-  - [8.4](#arrows--one-arg-parens) If your function takes a single argument and doesn’t use braces, omit the parentheses. Otherwise, always include parentheses around arguments for clarity and consistency. Note: it is also acceptable to always use parentheses, in which case use the [“always” option](https://eslint.org/docs/rules/arrow-parens#always) for eslint. eslint: [`arrow-parens`](https://eslint.org/docs/rules/arrow-parens.html)
+  - [8.4](#arrows--one-arg-parens) Always include parentheses around arguments for clarity and consistency. eslint: [`arrow-parens`](https://eslint.org/docs/rules/arrow-parens.html)
 
-    > Why? Less visual clutter.
+    > Why? Minimizes diff churn when adding or removing arguments.
 
     ```javascript
     // bad
-    [1, 2, 3].map((x) => x * x);
-
-    // good
     [1, 2, 3].map(x => x * x);
 
     // good
+    [1, 2, 3].map((x) => x * x);
+
+    // bad
     [1, 2, 3].map(number => (
+      `A long string with the ${number}. It’s so long that we don’t want it to take up space on the .map line!`
+    ));
+
+    // good
+    [1, 2, 3].map((number) => (
       `A long string with the ${number}. It’s so long that we don’t want it to take up space on the .map line!`
     ));
 
